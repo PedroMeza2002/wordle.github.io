@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wordle PPY</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1 class="logo"></h1>
+    <input type="text" id="guess-input" />
+    <button id="guess-button" disabled>Intentar</button>
+    <button id="restart-button" onclick="reiniciarJuego()" style="display: none;">Volver a Jugar</button>
+    <div id="grid"></div>
+    <p id="mensaje" class="mensaje"></p>
+  
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close" onclick="cerrarPopup()">&times;</span>
+        <p>
+          Es sencillo, tienes que escribir una palabra y ver las letras que has acertado, que tendrán diferente color dependiendo de si acertaste:
+          <li>Si la letra aparece en verde, es porque la has acertado y está en la palabra, y también está en la casilla correcta de la palabra.</li>
+          <li>Si la letra aparece en azul, es porque está en la palabra, pero no está en la casilla correcta.</li>
+          <li>Si la letra aparece en gris es porque no has acertado, y no está en la palabra que tienes que adivinar.</li>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
+
