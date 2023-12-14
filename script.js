@@ -1,5 +1,5 @@
 
-const DICCIONARIO = ["CIELO", "AGUAS", "NIEVE", "LEJOS", "BUZON", "JUEGO", "PIEZA", "FUEGO", "HIELO", "PERRO", "ROLLO", "ROMPE", "BANCO", "JURAS", "RISAS", "TELAS", "BAILE"];
+const DICCIONARIO = ["FELIZ", "MANGO", "PISTA", "LETRA", "TIGRE", "IGUAL", "GRANO", "CIELO", "BRISA", "JUEGO"];
 let PALABRA = DICCIONARIO[Math.floor(Math.random() * DICCIONARIO.length)];
 let intentos = 6;
 console.log(PALABRA);
@@ -81,17 +81,8 @@ function armarLetra(letra, color) {
     span.className = "letter";
     span.innerHTML = letra;
     span.style.backgroundColor = color;
+    span.style.borderRadius = "0";
     return span;
-}
-
-window.addEventListener("load", () => {
-    const popup = document.getElementById("popup");
-    popup.style.display = "block";
-});
-
-function cerrarPopup() {
-    const popup = document.getElementById("popup");
-    popup.style.display = "none";
 }
 
 function mostrarMensaje(mensaje) {
