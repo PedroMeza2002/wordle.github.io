@@ -1,12 +1,17 @@
-
-const DICCIONARIO = ["FELIZ", "MANGO", "PISTA", "LETRA", "TIGRE", "IGUAL", "GRANO", "CIELO", "BRISA", "JUEGO"];
-let PALABRA = DICCIONARIO[Math.floor(Math.random() * DICCIONARIO.length)];
-let intentos = 6;
-console.log(PALABRA);
-
 const BUTTON = document.getElementById("guess-button");
 const RESTART_BUTTON = document.getElementById("restart-button");
 const INPUT = document.getElementById("guess-input");
+let palabra = "";
+let intentos = 6;
+const UrlApi = "https://random-word-api.herokuapp.com/word?lang=en&&length=5";
+console.log(palabra);
+fetch(UrlApi).then(response => response.json()).then(response=>{
+    palabra=response[0].toUpperCase();
+    console.log("API: ",palabra);
+}).catch(err =>{
+    palabra= listaAuxiliarEnError[Math.floor(Math.random()*listaAuxiliarEnError.length)]
+    console.log("Lista auxiliar: ",palabra);
+});
 
 
 INPUT.addEventListener("input", () => {
@@ -35,11 +40,11 @@ BUTTON.addEventListener("click", () => {
 
     let row = document.createElement("div");
     row.className = "row";
-    for (let i in PALABRA) {
-        if (PALABRA[i] === INTENTO[i]) {
+    for (let i in palabra) {
+        if (palabra[i] === INTENTO[i]) {
             let cuadroLetra = armarLetra(INTENTO[i], "green");
             row.appendChild(cuadroLetra);
-        } else if (PALABRA.includes(INTENTO[i])) {
+        } else if (palabra.includes(INTENTO[i])) {
             let cuadroLetra = armarLetra(INTENTO[i], "blue");
             row.appendChild(cuadroLetra);
         } else {
@@ -48,7 +53,7 @@ BUTTON.addEventListener("click", () => {
         }
     }
     GRID.appendChild(row);
-    if (INTENTO === PALABRA) {
+    if (INTENTO === palabra) {
         terminar("<h1>GANASTE!</h1>");
         juegoTerminado = true;
     } else {
@@ -60,7 +65,7 @@ BUTTON.addEventListener("click", () => {
     }
 
 
-    if (intentos === 0 || INTENTO === PALABRA) {
+    if (intentos === 0 || INTENTO === palabra) {
         BUTTON.disabled = true;
         RESTART_BUTTON.style.display = "inline";
     }
@@ -95,7 +100,7 @@ function mostrarMensaje(mensaje) {
 
 function reiniciarJuego() {
     RESTART_BUTTON.removeEventListener("click", reiniciarJuego);
-    PALABRA = DICCIONARIO[Math.floor(Math.random() * DICCIONARIO.length)];
+    palabra = DICCIONARIO[Math.floor(Math.random() * DICCIONARIO.length)];
     intentos = 6;
     juegoTerminado = false;
 
@@ -109,7 +114,7 @@ function reiniciarJuego() {
 
     terminar("");
 
-    console.log(PALABRA);
+    console.log(palabra);
 
     RESTART_BUTTON.addEventListener("click", reiniciarJuego);
 }
